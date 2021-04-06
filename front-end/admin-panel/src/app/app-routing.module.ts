@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AssociateBuilderComponent } from './associate-builder/associate-builder.component';
+
 
 const routes: Routes = [
   {
     path:'',
     component: AppComponent
   },
-  {path:'associate-builder', 
-  loadChildren: () => import('../app/associate-builder/associate-builder.module').then(m => m.AssociateBuilderModule)
+  {path:'dashboard', 
+  loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule)
 },{
   path:'**',
   redirectTo:'associate-builder'

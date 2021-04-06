@@ -11,6 +11,18 @@ export class SideNavComponent implements OnInit {
 
   private mediaMatcher: MediaQueryList 
   = window.matchMedia('(max-width: 720px)')
+
+  links = [
+    {
+      name: 'Associates',
+      url: 'associates'
+    },
+    {
+      name: 'Others',
+      url: 'others'
+    },
+  ]
+
   constructor(zone: NgZone) { 
     let media = this.mediaMatcher;
     media.addEventListener('change',(mql:any) => {

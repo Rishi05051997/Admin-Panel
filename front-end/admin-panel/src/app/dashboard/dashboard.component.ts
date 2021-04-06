@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-associate-builder',
+  selector: 'app-dashboard',
   template: `
     <app-side-nav></app-side-nav>
   `,
   styles: [
   ]
 })
-export class AssociateBuilderComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   constructor() { }
 
