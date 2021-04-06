@@ -4,6 +4,7 @@ import { AssociatesListingComponent } from './associates/components/associates-l
 
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { DashboardComponent } from './dashboard.component';
+import { OthersListingComponent } from './others/components/others-listing/others-listing.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path:'associates',
         component: AssociatesListingComponent
+      },
+      {
+        path:'others',
+        component: OthersListingComponent
       },
       
     ]

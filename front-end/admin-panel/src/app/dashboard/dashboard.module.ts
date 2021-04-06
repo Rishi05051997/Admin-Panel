@@ -7,6 +7,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AssociatesModule } from './associates/associates.module';
+import { OthersModule } from './others/others.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AssociatesModule } from './associates/associates.module';
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    AssociatesModule
+    AssociatesModule,
+    OthersModule
   ]
 })
 export class DashboardModule { }
