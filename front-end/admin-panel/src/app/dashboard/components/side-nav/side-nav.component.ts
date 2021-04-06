@@ -18,8 +18,8 @@ export class SideNavComponent implements OnInit {
       url: 'associates'
     },
     {
-      name: 'Others',
-      url: 'others'
+      name: 'Clients',
+      url: 'clients'
     },
   ]
 

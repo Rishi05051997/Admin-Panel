@@ -20,7 +20,7 @@ const routes: Routes = [
         component: AssociatesListingComponent
       },
       {
-        path:'others',
+        path:'clients',
         component: OthersListingComponent
       },
       
