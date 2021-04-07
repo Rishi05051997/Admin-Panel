@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MaterialModule,
     FormsModule
+  ],
+  exports: [
+    OthersListingComponent
   ]
 })
 export class OthersModule { }
