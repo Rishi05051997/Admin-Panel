@@ -1,0 +1,190 @@
+{
+    "title": "Associate Builder API Documentation",
+    "description": "Swagger API Documentation for Associate Builder MEAN Stack App",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+   
+    "swagger": "2.0",
+    "host": "localhost:3000",
+    "basePath": "/api",
+
+    "tags": [
+      {
+        "name": "Associates",
+        "description": "API for Associate"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/Associates": {
+        "post": {
+          "tags": ["Associates"],
+          "summary": "Create new Associate",
+          "description": "Create new Associate in the System",
+          "parameters": [
+            {
+              "name": "associate",
+              "description": "Associate that we want to create associate",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#definitions/Associate"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "new Associate is created",
+              "schema": {
+                "$ref": "#definitions/Associate"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": ["Associates"],
+          "summary": "FInd all Associates from the server",
+          "description": "All assciates",
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "$ref": "#definitions/Associates"
+              }
+            }
+          }
+        }
+      },
+      "/Associates/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the Associate",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": ["Associates"],
+          "description": "Find the Associate by id",
+          "summary": "Find single Associate",
+          "responses": {
+            "200": {
+              "description": "Associate has found",
+              "schema": {
+                "$ref": "#definitions/Associate"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Associates"],
+          "description": "Delete the Associate by id",
+          "summary": "Delete single Associate",
+          "responses": {
+            "200": {
+              "description": "Invoice has deleted",
+              "schema": {
+                "$ref": "#definitions/Associate"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Associates"],
+          "summary": "Update an Associate",
+          "description": "Update Associate in the System",
+          "parameters": [
+            {
+              "name": "associate",
+              "description": "Associate that we want to udpate",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#definitions/UpdateAssociate"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Associate is updated",
+              "schema": {
+                "$ref": "#definitions/Associate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Associate": {
+        "required": ["item, qty, date, due"],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "item": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "due": {
+            "type": "string",
+            "format": "date"
+          },
+          "rate": {
+            "type": "number",
+            "format": "float"
+          },
+          "tax": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "UpdateAssociate": {
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "due": {
+            "type": "string",
+            "format": "date"
+          },
+          "rate": {
+            "type": "number",
+            "format": "float"
+          },
+          "tax": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Associates": {
+        "type": "array",
+        "$ref": "#definitions/Associate"
+      }
+    }
+  }

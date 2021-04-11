@@ -25,4 +25,7 @@ const AssociateSchema = new Schema({
         type: Number,
         // required: true
     },
-})
+});
+
+export default mongoose.model('Associate', AssociateSchema);
+
