@@ -10,7 +10,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 export class SideNavComponent implements OnInit {
 
   private mediaMatcher: MediaQueryList 
-  = window.matchMedia('(max-width: 720px)')
+  = window.matchMedia('(max-width: 720px)');
 
   links = [
     {
@@ -26,7 +26,7 @@ export class SideNavComponent implements OnInit {
   constructor(zone: NgZone) { 
     let media = this.mediaMatcher;
     media.addEventListener('change',(mql:any) => {
-      console.log(mql);
+      // console.log(mql);
       zone.run(() => media = mql);
       
     })
