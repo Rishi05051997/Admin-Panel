@@ -124,61 +124,70 @@
     },
     "definitions": {
       "Associate": {
-        "required": ["item, qty, date, due"],
+        "required": ["empId, name, location,email, role"],
         "properties": {
           "_id": {
             "type": "string",
             "uniqueItems": true
           },
-          "item": {
+          "empId": {
             "type": "string"
           },
-          "qty": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "type": "string"
+         
           },
-          "date": {
-            "type": "string",
-            "format": "date"
+          "location": {
+            "type": "string"
+            
           },
-          "due": {
-            "type": "string",
-            "format": "date"
+          "role": {
+            "type": "string"
+            
           },
-          "rate": {
-            "type": "number",
-            "format": "float"
+          "email": {
+            "type": "string"
+           
           },
-          "tax": {
-            "type": "number",
-            "format": "float"
+          
+          "status": {
+            "type": "boolean"
+            
+          },
+          "password": {
+            "type": "string"
+           
           }
         }
       },
       "UpdateAssociate": {
         "properties": {
-          "item": {
+          "empId": {
             "type": "string"
           },
-          "qty": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "type": "string"
+         
           },
-          "date": {
-            "type": "string",
-            "format": "date"
+          "location": {
+            "type": "string"
+            
           },
-          "due": {
-            "type": "string",
-            "format": "date"
+          "role": {
+            "type": "string"
+            
           },
-          "rate": {
-            "type": "number",
-            "format": "float"
+          "email": {
+            "type": "string"
+           
           },
-          "tax": {
-            "type": "number",
-            "format": "float"
+          "status": {
+            "type": "boolean"
+            
+          },
+          "password": {
+            "type": "string"
+           
           }
         }
       },

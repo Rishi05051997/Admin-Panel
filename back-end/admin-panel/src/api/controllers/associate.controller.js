@@ -30,20 +30,23 @@ export default {
     //   .catch(err => res.status(500).json(err));
 
 
-    const {item, qty, date, due, tax, rate} = req.body;
-        if(!item) {
-            return res.status(400).json({err:'Item is required field'});
+    const {empId, name, location, email, role ,status, password} = req.body;
+        if(!empId) {
+            return res.status(400).json({err:'EmployeeId is required field'});
         }
-        if(!qty) {
-            return res.status(400).json({err:'Quanity is required field'});
+        if(!name) {
+            return res.status(400).json({err:'Name is required field'});
         }
-        if(!date) {
-            return res.status(400).json({err:'Date is required field'});
+        if(!location) {
+            return res.status(400).json({err:'Location is required field'});
         }
-        if(!due) {
-            return res.status(400).json({err:'Due is required field'});
+        if(!email) {
+            return res.status(400).json({err:'Email is required field'});
         }
-        Associate.create({item, qty, date, due, tax, rate})
+        if(!role) {
+          return res.status(400).json({err:'Role is required field'});
+      }
+        Associate.create({empId, name, location, email, role, status, password})
         .then( associate => {
             res.json(associate);
         })
@@ -76,9 +79,9 @@ export default {
   update(req, res) {
     const { id } = req.params;
     const allBody = req.body;
-    const {item, qty, date, due, tax, rate} = allBody;
-    if(item || qty || date || due) {
-        return res.status(200).json({item, qty, date, due,tax, due});
+    const {empId, name, location, email, role, status, password} = allBody;
+    if(empId, name, location, email, role) {
+        return res.status(200).json({empId, name, location, email, status, password});
         
     }
     // if(!qty) {
@@ -90,7 +93,7 @@ export default {
     // if(!due) {
     //     return res.status(400).json({err:'Due is required field'});
     // }
-    Associate.create({item, qty, date, due, tax, rate})
+    Associate.create({empId, name, location, email, role, status, password})
     .then( associate => {
         res.json(associate);
     })
