@@ -1,28 +1,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const AssociateSchema = new Schema({
-    item: {
+    empId: {
         type: String,
         required: true
     },
-    qty: {
-        type: Number,
+    name: {
+        type: String,
         required: true
     },
-    date: {
-        type: Date,
+    location: {
+        type: String,
         required: true
     },
-    due: {
-        type: Date,
+    role: {
+        type: String,
         required: true
     },
-    rate: {
-        type: Number,
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
         // required: true
     },
-    tax: {
-        type: Number,
+    status: {
+        type: Boolean,
         // required: true
     },
 });

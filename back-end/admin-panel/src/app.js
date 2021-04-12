@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 import {router} from '../src/config/routes'
 import logger from 'morgan';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors';
 import swaggerDocument from './config/swagger.json';
 
 const app = express(); 
@@ -21,6 +22,7 @@ mongoose.connect('mongodb://localhost/associate-builder', options);
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 app.use(logger('dev'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
     explorer: true

@@ -14,13 +14,13 @@ export class SideNavComponent implements OnInit {
 
   links = [
     {
-      name: 'Associates',
+      name: 'Hr-Managemennt',
       url: 'associates'
     },
-    {
-      name: 'Clients',
-      url: 'clients'
-    },
+    // {
+    //   name: 'Clients',
+    //   url: 'clients'
+    // },
   ]
 
   constructor(zone: NgZone) { 

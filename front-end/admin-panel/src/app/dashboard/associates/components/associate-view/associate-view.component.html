@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-title>Associate</mat-card-title>
+    <mat-card-content>
+      <table>
+        <tr>
+          <td class="column-title">Name: </td>
+          <td>{{associate.name}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Location: </td>
+          <td>{{associate.location}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Role: </td>
+          <td>{{associate.role}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Employee Id: </td>
+          <td>{{associate.empId}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Email Id: </td>
+          <td>{{associate.email}}</td>
+        </tr>
+        <tr>
+          <!-- <td class="column-title">Client Name: </td>
+          <td>{{invoice.client.firstName}} {{invoice.client.lastName}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Client Email: </td>
+          <td>{{invoice.client.email}}</td>
+        </tr>
+        <tr>
+          <td class="column-title">Total: </td>
+          <td>${{total}}</td> -->
+        </tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="accent" [routerLink]="['/dashboard','associates',associate._id]">Edit</button>
+      <!-- <button mat-button>Download</button> -->
+    </mat-card-actions>
+  </mat-card>
