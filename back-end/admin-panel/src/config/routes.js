@@ -1,4 +1,4 @@
-import express from 'express';
+// import express from 'express';
 import associateController from '../api/controllers/associate.controller';
 export const router = express.Router();
 

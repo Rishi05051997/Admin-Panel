@@ -8,6 +8,7 @@ import { AssociateService } from './services/associate.service';
 import { AssociateFormComponent } from './components/associate-form/associate-form.component';
 import { AssociateViewComponent } from './components/associate-view/associate-view.component';
 import { RouterModule } from '@angular/router';
+import { EditAssociateResolveService } from './services/edit-associate-resolve.service';
 
 
 

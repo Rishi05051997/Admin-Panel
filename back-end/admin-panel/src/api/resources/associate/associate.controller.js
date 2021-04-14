@@ -1,8 +1,8 @@
-// import Joi from 'Joi';
+// import Joi from 'joi';
 // const Joi = require('Joi')
 // const Joi = require("@hapi/joi");
 // import HttpStatus from 'http-status-codes';
-import Associate from '../models/associate.model'
+import Associate from './associate.model'
 
 export default {
   findAll(req, res, next) {

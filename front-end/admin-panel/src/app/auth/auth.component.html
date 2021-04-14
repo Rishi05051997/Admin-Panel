@@ -1,0 +1,53 @@
+<div class="limiter">
+    <div class="container-login">
+        <mat-card>
+            <div *ngIf="isLoadingResults" class="mat-elevation-z8">
+                <div class="loading-shade">
+                    <mat-spinner mode="determinate"  color="accent"></mat-spinner>
+                </div>
+            </div>
+            
+            <mat-card-title>{{title}}</mat-card-title>
+            <mat-card-content>
+                <form class="form-container" [formGroup]="authForm"  (ngSubmit)="onSubmit()">
+                    <!-- {{this.authForm.value | json}} -->
+                    <mat-form-field class="mat-Input" appearance="fill" >
+                        <!-- <mat-label>Employee Id</mat-label> -->
+                        <input matInput placeholder="email"  formControlName="email">
+                        <mat-error *ngIf="this.Controls.email.touched &&  this.Controls.email.invalid">EmailId is required</mat-error>
+                       
+                    </mat-form-field><br>
+                    <mat-form-field class="mat-Input" appearance="fill" >
+                        <!-- <mat-label>Employee Id</mat-label> -->
+                        <input matInput placeholder="password" type="password" formControlName="password">
+                        <mat-error *ngIf="this.Controls.password.touched &&  this.Controls.password.invalid">Password is required</mat-error>
+                       
+                    </mat-form-field><br>
+                    <div class="btn-mat">
+                        <button 
+                       
+                            mat-raised-button type="submit" 
+                            [disabled]="!authForm.valid" 
+                            (click)="onSubmit()" color="primary">
+                            {{title}}
+                        </button>
+                        
+                        
+                    </div>
+                </form>
+                <div class="alternative" *ngIf="title === 'Login'">
+                    <h5>Don't have An Account please Sign In 👇👇👇👇</h5>
+                   <button mat-raised-button [routerLink]="['/signup']" color="primary">Signup</button>
+                </div>
+                <div class="alternative" *ngIf="title === 'Signup'">
+                    <h5>Already have An Account please Log In 👇👇👇👇</h5>
+                   <button mat-raised-button [routerLink]="['/login']" color="primary">Login</button>
+                </div>
+                
+            
+                
+            </mat-card-content>
+        </mat-card>
+        
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from '../core/service/auth-guard.service';
 import { AssociateFormComponent } from './associates/components/associate-form/associate-form.component';
 import { AssociateViewComponent } from './associates/components/associate-view/associate-view.component';
 import { AssociatesListingComponent } from './associates/components/associates-listing/associates-listing.component';
@@ -11,34 +12,41 @@ const routes: Routes = [
   {
     path:'', 
     component:DashboardComponent,
+    canActivate: [AuthGuardService],
     children: [
       
       {
         path:'associates',
-        component: AssociatesListingComponent
+        component: AssociatesListingComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path:'associates/new',
-        component: AssociateFormComponent
+        component: AssociateFormComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path:'associates/:id/view',
         component: AssociateViewComponent,
+        canActivateChild: [AuthGuardService],
         resolve: {
           associate: EditAssociateResolveService
         }
       },
       {
         path:'associates/:id',
-        component: AssociateFormComponent
+        component: AssociateFormComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path:'clients',
-        component: OthersListingComponent
+        component: OthersListingComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path:'**',
-        redirectTo: "associates"
+        redirectTo: "associates",
+        canActivateChild: [AuthGuardService]
       },
       
     ]

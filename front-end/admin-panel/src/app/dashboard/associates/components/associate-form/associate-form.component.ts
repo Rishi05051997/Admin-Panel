@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Associate } from '../../models/associate';
 import { AssociateService } from '../../services/associate.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { AssociateService } from '../../services/associate.service';
 export class AssociateFormComponent implements OnInit {
   associateForm: any;
   associate: any;
+  title = 'New Associate';
   constructor(
     private fb : FormBuilder,
     private associateService: AssociateService,
@@ -40,7 +42,7 @@ export class AssociateFormComponent implements OnInit {
 
   onSubmit(){
     // debugger;
-    // console.log(this.associateForm.value);
+    console.log(this.associateForm.value);
     // user wants to edit the invoice
 
     if(this.associate){
@@ -92,12 +94,27 @@ export class AssociateFormComponent implements OnInit {
         if(!id) {
           return;
         }
+        this.title = 'Edit Associate';
         this.associateService.getAssociateById(id).subscribe(res => {
           
           this.associate = res;
           this.associateForm.patchValue(this.associate);
         },  (err:any) => this.errorHandler(err,'Failed to get Associate')
         )
+        if(this.associate){
+          this.associateService.getUpdateAssociate(id, this.associateForm.value).subscribe( res => {
+            this.snackBar.open('Associate Updated Successfully', 'Success',{
+              duration: 3000
+            });
+            this.router.navigate(['dashboard', 'associates']);
+          }, (err: any) => this.errorHandler(err, 'Failed to update associate')
+    
+          )
+    
+        }
+
+        
+        
       }
     )
 

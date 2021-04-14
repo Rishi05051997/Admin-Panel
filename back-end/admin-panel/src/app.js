@@ -3,32 +3,42 @@ import express from "express";
 // import  mongoose from " mongoose";
 
 const mongoose = require('mongoose');
-import {router} from '../src/config/routes'
-import logger from 'morgan';
-import swaggerUi from 'swagger-ui-express';
-import cors from 'cors';
-import swaggerDocument from './config/swagger.json';
+// import {router} from '../src/config/routes'
+// import logger from 'morgan';
+// import swaggerUi from 'swagger-ui-express';
+// import cors from 'cors';
+// import passport from 'passport';
+// import swaggerDocument from './config/swagger.json';
+import { restRouter } from "./api/";
+import {devConfig} from "./config/env/development"
+import {setGlobalMiddleware} from './api/middleware/global-middleware'
+
 
 const app = express(); 
-const PORT = 3000;
+const PORT = devConfig.port;
 mongoose.Promise = global.Promise;
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
 }
-mongoose.connect('mongodb://localhost/associate-builder', options);
+mongoose.connect(`mongodb://localhost/${devConfig.database}`, options);
 
 
 
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(cors());
-app.use(logger('dev'));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-    explorer: true
-}))
+// app.use(express.json());
+// app.use(express.urlencoded());
+// app.use(cors());
+// app.use(logger('dev'));
+// app.use(passport.initialize());
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+//     explorer: true
+// }))
+//// Global Middleware
+setGlobalMiddleware(app);
+
 // middleware 
-app.use('/api', router);
+app.use('/api', restRouter);
 
 app.use((req, res ,next) => {
     const error = new Error ('Not found');
