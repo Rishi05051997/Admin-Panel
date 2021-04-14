@@ -9,6 +9,8 @@ import { AssociatesModule } from './associates/associates.module';
 import { OthersModule } from './others/others.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditAssociateResolveService } from './associates/services/edit-associate-resolve.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from '../core/service/http-interceptor.service';
 
 
 
@@ -22,6 +24,10 @@ import { EditAssociateResolveService } from './associates/services/edit-associat
     OthersModule,
     ReactiveFormsModule
   ],
-  providers:[EditAssociateResolveService]
+  providers:[EditAssociateResolveService,
+  {
+    provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
+  }
+  ]
 })
 export class DashboardModule { }

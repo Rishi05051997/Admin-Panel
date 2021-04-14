@@ -2,7 +2,7 @@
     <mat-card>
 
         <!-- {{this.associateForm.value | json}} -->
-        <h2>Add Associate</h2>
+        <h2>{{title}}</h2>
         <form class="form-container" [formGroup]="associateForm"  (ngSubmit)="onSubmit()">
             <mat-form-field class="mat-Input" appearance="fill" >
                 <mat-label>Employee Id</mat-label>

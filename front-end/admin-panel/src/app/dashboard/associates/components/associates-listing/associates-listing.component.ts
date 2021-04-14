@@ -15,7 +15,7 @@ import {remove} from 'lodash';
 })
 export class AssociatesListingComponent implements OnInit {
   associates: any=[];
-  displayedColumns: string[] = ['empId', 'name','location', 'role',  'email', 'status','action'];
+  displayedColumns: string[] = ['empId', 'name', 'email', 'status','action'];
   dataSource:any=[];
   animal: any;
   name: any;
@@ -33,7 +33,9 @@ export class AssociatesListingComponent implements OnInit {
   
 
   getAssociate(){
+    // debugger;
     this.associateService.getAssociates().subscribe((res: any) => {
+
       this.dataSource = res;
       // this.associates = res;
     }, (err: any) => this.errorHandler(err, 'Failed to fetch Associates'));

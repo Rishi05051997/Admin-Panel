@@ -1,14 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class EditAssociateResolveService {
-
-//   constructor() { }
-// }
-
-
 import { Injectable } from '@angular/core';
 import {
   Resolve,
@@ -34,10 +23,11 @@ export class EditAssociateResolveService implements Resolve<any> {
     var id:any = route.paramMap.get('id');
     return this.associateServive.getAssociateById(id).pipe(
       take(1),
-      map(associate => {
+      map((associate:any) => {
         if (associate) {
           return associate;
-        } else {
+        } 
+        else {
           this.router.navigate(['/dashboard', 'associates']);
           return null;
         }
