@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoosePaginate from 'mongoose-paginate';
+
+const {Schema} = mongoose;
 const AssociateSchema = new Schema({
     empId: {
         type: String,
@@ -31,5 +33,6 @@ const AssociateSchema = new Schema({
     },
 });
 
+AssociateSchema.plugin(mongoosePaginate);
 export default mongoose.model('Associate', AssociateSchema);
 

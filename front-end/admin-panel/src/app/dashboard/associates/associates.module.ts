@@ -9,11 +9,13 @@ import { AssociateFormComponent } from './components/associate-form/associate-fo
 import { AssociateViewComponent } from './components/associate-view/associate-view.component';
 import { RouterModule } from '@angular/router';
 import { EditAssociateResolveService } from './services/edit-associate-resolve.service';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { SearchfilterPipe } from '../pipe/searchfilter.pipe';
 
 
 
 @NgModule({
-  declarations: [AssociatesListingComponent, AssociateFormComponent, AssociateViewComponent],
+  declarations: [AssociatesListingComponent, AssociateFormComponent, AssociateViewComponent, FileUploadComponent, SearchfilterPipe],
   imports: [
     CommonModule,
     MaterialModule,
@@ -24,7 +26,9 @@ import { EditAssociateResolveService } from './services/edit-associate-resolve.s
   ],
   exports: [
     AssociatesListingComponent,
-    AssociateFormComponent
+    AssociateFormComponent,
+    FileUploadComponent,
+    SearchfilterPipe
   ],
   providers: [AssociateService],
 })

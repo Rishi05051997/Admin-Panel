@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Associate } from '../models/associate';
+import { Associate, AssociatePaginationRsp } from '../models/associate';
 
 
 const BASE_URL = 'http://localhost:3000/api'
@@ -12,10 +12,18 @@ const BASE_URL = 'http://localhost:3000/api'
 export class AssociateService {
 
   constructor( private http: HttpClient) { }
-
-  getAssociates():Observable<Associate>{
-   
-    return this.http.get<Associate>(`${BASE_URL}/associates`);
+  page:any;
+  perPage:any;
+  getAssociates():Observable<AssociatePaginationRsp>{
+    let queryString1 = `${BASE_URL}/associates`
+    // let queryString = `${BASE_URL}/associates?page=${page + 1}&perPage=${perPage}`;
+    // if(sortField && sortDir) {
+    //   queryString = `${queryString}&sort=${sortField}&sortDir=${sortDir}`;
+    // }
+    // if (filter) {
+    //   queryString = `${queryString}&filter=${filter}`
+    // }
+    return this.http.get<AssociatePaginationRsp>(queryString1);
   }
 
   createAssociate(body:Associate):Observable<Associate> {

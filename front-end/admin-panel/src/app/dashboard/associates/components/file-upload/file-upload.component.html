@@ -1,0 +1,40 @@
+<mat-card>
+    <h2>Please upload excell file to show results..👇👇👇👇👇</h2>
+    <div class="col-md-8 form-group">        
+        <input type="file" class="form-control" (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">        
+      </div> 
+      <div>
+        <div *ngIf="isTableShoe">
+          <div class="form-group-row">
+            <label for="search" class="col-sm-2-col-form-label" style="text-align: right;">Search By Names</label>
+            <div class="col-sm-8">
+              <input type="text" [(ngModel)]="searchValue" class="form-control" id="search">
+            </div>
+           
+          </div>
+          
+          <table  id="customers" class="mt-5">
+              <tbody>
+                <tr>
+                    <th>Emp Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Role</th>
+                  </tr>
+                  <tr *ngFor="let value of fileList | searchfilter:searchValue">
+                    <td>{{value.empId}}</td>
+                    <td>{{value.Name}}</td>
+                    <td>{{value.Email}}</td>
+                    <td>{{value.Location}}</td>
+                    <td>{{value.Role}}</td>
+                  </tr>
+              </tbody>
+          </table>
+          
+        </div>
+        
+     
+      </div>
+      
+</mat-card>

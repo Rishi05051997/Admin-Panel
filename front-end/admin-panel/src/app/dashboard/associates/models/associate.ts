@@ -1,12 +1,13 @@
 
 export class Associate {
     "_id": string;
-    "item": string;
-    "qty": number;
-    "date": Date;
-    "due": Date;
-    "tax": number;
-    "rate": number;
+    "empId": string;
+    "name": string;
+    "email": string;
+    "status": boolean;
+    "location": string;
+    "role": string;
+    "pasword": string;
   }
   export class AssociatePaginationRsp {
     "docs": Associate[];

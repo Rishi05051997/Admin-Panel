@@ -6,9 +6,28 @@ import Associate from './associate.model'
 
 export default {
   findAll(req, res, next) {
-    Associate.find()
-      .then(associates => res.json(associates))
-      .catch(err => res.status(500).json(err));
+    const { page = 1, perPage = 10, filter, sortField, sortDir } = req.query;
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(perPage, 10),
+    };
+    const query = {};
+    if (filter) {
+      query.name = {
+        $regex: filter,
+      };
+    }
+    if (sortField && sortDir) {
+      options.sort = {
+        [sortField]: sortDir,
+      };
+    }
+    Associate.paginate(query, options)
+      .then(associates => 
+        setTimeout(() =>{
+          res.json(associates)
+        }, 5000))
+      .catch(err => res.status(500).json(err))
   },
   create(req, res, next) {
     // const schema = Joi.object().keys({

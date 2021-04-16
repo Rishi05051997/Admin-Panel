@@ -4,6 +4,7 @@ import { AuthGuardService } from '../core/service/auth-guard.service';
 import { AssociateFormComponent } from './associates/components/associate-form/associate-form.component';
 import { AssociateViewComponent } from './associates/components/associate-view/associate-view.component';
 import { AssociatesListingComponent } from './associates/components/associates-listing/associates-listing.component';
+import { FileUploadComponent } from './associates/components/file-upload/file-upload.component';
 import { EditAssociateResolveService } from './associates/services/edit-associate-resolve.service';
 import { DashboardComponent } from './dashboard.component';
 import { OthersListingComponent } from './others/components/others-listing/others-listing.component';
@@ -39,10 +40,16 @@ const routes: Routes = [
         canActivateChild: [AuthGuardService]
       },
       {
+        path:'upload',
+        component: FileUploadComponent,
+        canActivateChild: [AuthGuardService]
+      },
+      {
         path:'clients',
         component: OthersListingComponent,
         canActivateChild: [AuthGuardService]
       },
+
       {
         path:'**',
         redirectTo: "associates",

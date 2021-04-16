@@ -47,9 +47,13 @@ export class AuthComponent implements OnInit {
       // we need to send the request for signup
       this.authService.SignUp(this.authForm.value).subscribe(
         data => {
+          debugger;
           console.log(data);
           // this.jwtService.setToken(data.token);
-          this.router.navigate(['/dashboard', 'associates']);
+          this.router.navigate(['/login']);
+          this.snackBar.open('You need to login first', 'Success',{
+            duration: 5000
+          })
         }, err  => this.errorHandler(err, 'Failed to Signup'),
         () => this.isLoadingResults = false
       )
