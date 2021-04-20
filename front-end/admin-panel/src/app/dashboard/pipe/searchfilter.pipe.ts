@@ -12,7 +12,8 @@ export class SearchfilterPipe implements PipeTransform {
     if(term === undefined) return people;
     //return updates people array
     return people.filter(function(thisperson){
-      return thisperson.Name.toLowerCase().includes(term.toLowerCase())
+       return thisperson.Name.toLowerCase().includes(term.toLowerCase())
+       
       
     }) 
 

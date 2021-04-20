@@ -11,18 +11,21 @@ import { RouterModule } from '@angular/router';
 import { EditAssociateResolveService } from './services/edit-associate-resolve.service';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { SearchfilterPipe } from '../pipe/searchfilter.pipe';
-
+import { AddComponent } from './components/file-upload/add/add.component';
+import { EditComponent } from './components/file-upload/edit/edit.component';
+import { NgxPaginationModule } from 'ngx-pagination'
 
 
 @NgModule({
-  declarations: [AssociatesListingComponent, AssociateFormComponent, AssociateViewComponent, FileUploadComponent, SearchfilterPipe],
+  declarations: [AssociatesListingComponent, AssociateFormComponent, AssociateViewComponent, FileUploadComponent, SearchfilterPipe, AddComponent, EditComponent],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ],
   exports: [
     AssociatesListingComponent,

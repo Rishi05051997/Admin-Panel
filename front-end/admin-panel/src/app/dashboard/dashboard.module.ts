@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditAssociateResolveService } from './associates/services/edit-associate-resolve.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '../core/service/http-interceptor.service';
+import { EmployeeService } from './associates/components/file-upload/service/employee.service';
 
 
 
@@ -23,9 +24,10 @@ import { HttpInterceptorService } from '../core/service/http-interceptor.service
     MaterialModule,
     AssociatesModule,
     OthersModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
-  providers:[EditAssociateResolveService,
+  providers:[EditAssociateResolveService,EmployeeService,
   {
     provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
   }

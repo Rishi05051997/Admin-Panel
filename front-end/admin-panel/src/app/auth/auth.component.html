@@ -13,14 +13,16 @@
                     <!-- {{this.authForm.value | json}} -->
                     <mat-form-field class="mat-Input" appearance="fill" >
                         <!-- <mat-label>Employee Id</mat-label> -->
-                        <input matInput placeholder="email"  formControlName="email">
-                        <mat-error *ngIf="this.Controls.email.touched &&  this.Controls.email.invalid">EmailId is required</mat-error>
-                       
+                        <input matInput placeholder="email"   formControlName="email">
+                        
+                        <mat-error *ngIf="Controls.email.touched &&  Controls.email.invalid">EmailId is required</mat-error>
+                        <mat-error *ngIf="Controls.email.touched && Controls.email.errors?.email">Please enter valid email id</mat-error>
                     </mat-form-field><br>
                     <mat-form-field class="mat-Input" appearance="fill" >
                         <!-- <mat-label>Employee Id</mat-label> -->
-                        <input matInput placeholder="password" type="password" formControlName="password">
-                        <mat-error *ngIf="this.Controls.password.touched &&  this.Controls.password.invalid">Password is required</mat-error>
+                        <input matInput placeholder="password" [type]="password ? 'text' : 'password'" formControlName="password">
+                        <span class="eye"><img src="assets/images/eye.svg" height="20px" width="20px" (click)="togglePasswordFieldType()"></span>
+                        <mat-error *ngIf="Controls.password.touched &&  Controls.password.invalid">Password is required</mat-error>
                        
                     </mat-form-field><br>
                     <div class="btn-mat">

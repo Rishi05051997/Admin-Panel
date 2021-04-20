@@ -1,0 +1,13 @@
+.ng-danger p {
+    color:red;
+}
+.mat-card {
+    width: 500px;
+}
+
+@media (max-Width: 720px){
+    .mat-card {
+        margin: 0 -1.5rem;;
+        width: 300px;
+    } 
+}

@@ -22,6 +22,9 @@ export class AssociatesListingComponent implements OnInit {
   name: any;
   resultsLength = 0;
   isresultsLoading = false;
+  status:boolean;
+  isChecked = true;
+  isUnchecked = false;
   @ViewChild(MatPaginator, {static: false})
   set paginator(value: MatPaginator) {
     // if (this.dataSource){
@@ -35,6 +38,8 @@ export class AssociatesListingComponent implements OnInit {
       this.isresultsLoading = true;
       console.log(data);
       this.dataSource = data.docs;
+      console.log(data.docs[0].status);
+      this.status = data.docs[0].status;
       this.resultsLength = data.total;
       // this.isresultsLoading = false;
 

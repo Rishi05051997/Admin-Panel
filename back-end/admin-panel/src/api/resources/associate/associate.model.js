@@ -27,10 +27,7 @@ const AssociateSchema = new Schema({
         type: String,
         // required: true
     },
-    status: {
-        type: Boolean,
-        // required: true
-    },
+    status: false
 });
 
 AssociateSchema.plugin(mongoosePaginate);

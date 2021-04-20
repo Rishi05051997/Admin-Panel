@@ -26,7 +26,7 @@ export default {
       .then(associates => 
         setTimeout(() =>{
           res.json(associates)
-        }, 5000))
+        }, 2000))
       .catch(err => res.status(500).json(err))
   },
   create(req, res, next) {

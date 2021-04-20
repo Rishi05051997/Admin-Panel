@@ -4,7 +4,14 @@ table {
 table ng-container th{
     text-align: center;
 }
+.btn-Add {
+  position: relative;
+  left: 200px;
+  top:-20px;
+  background-color: #3f51b5;
+  color: rgb(255, 255, 255);
 
+}
 .menu-bar {
     position: absolute;
     right: 50px;

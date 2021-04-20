@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Associate } from '../../models/associate';
 import { AssociateService } from '../../services/associate.service';
 
@@ -13,13 +14,15 @@ import { AssociateService } from '../../services/associate.service';
 export class AssociateFormComponent implements OnInit {
   associateForm: any;
   associate: any;
-  title = 'New Associate';
+  title = 'New Hr';
+  isUnchecked = false;
   constructor(
     private fb : FormBuilder,
     private associateService: AssociateService,
     public snackBar : MatSnackBar,
     private router: Router,
-    private activatedROute: ActivatedRoute
+    private activatedROute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -30,13 +33,13 @@ export class AssociateFormComponent implements OnInit {
 
   createForm(){
     this.associateForm = this.fb.group({
-      empId: ['', Validators.required],
-      name:  ['', Validators.required],
+      empId: ['', [Validators.required, Validators.pattern('^[0-9]{1,7}$')]],
+      name:  ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       location:  ['', Validators.required],
       role:  ['', Validators.required],
-      email:  ['', Validators.required],
+      email:  ['', [Validators.required, Validators.email]],
       password:  ['', Validators.required],
-      status:  ['', Validators.required]
+      status:  ['']
     })
   }
 
@@ -44,8 +47,30 @@ export class AssociateFormComponent implements OnInit {
     // debugger;
     console.log(this.associateForm.value);
     // user wants to edit the invoice
-
     if(this.associate){
+      this.authService.SignUp(this.associateForm.patchValue({
+        email: this.Controls.email.value,
+        password: this.Controls.password.value
+
+      })).subscribe(
+        data => {
+          debugger;
+          console.log(data);
+          // this.jwtService.setToken(data.token);
+          // this.router.navigate(['/login']);
+
+          this.snackBar.open('User Created Successfully', 'Success',{
+            duration: 2000
+          })
+        }
+        // , err  => this.errorHandler(err, 'Failed to Signup'),
+        // () => this.isLoadingResults = false
+      )
+
+
+    }
+
+    else if(this.associate){
       this.associateService.getUpdateAssociate(this.associate._id, this.associateForm.value).subscribe( res => {
         this.snackBar.open('Associate Updated Successfully', 'Success',{
           duration: 3000
@@ -94,7 +119,7 @@ export class AssociateFormComponent implements OnInit {
         if(!id) {
           return;
         }
-        this.title = 'Edit Associate';
+        this.title = 'Edit Hr';
         this.associateService.getAssociateById(id).subscribe(res => {
           
           this.associate = res;

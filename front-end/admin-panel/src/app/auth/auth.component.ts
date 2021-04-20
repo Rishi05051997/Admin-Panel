@@ -14,6 +14,7 @@ export class AuthComponent implements OnInit {
   authForm = new FormGroup({});
   title = '';
   isLoadingResults: boolean = false;
+  password: boolean;
   constructor(
     private fb : FormBuilder,
     private authService: AuthService,
@@ -30,7 +31,7 @@ export class AuthComponent implements OnInit {
 
   initForm() {
     this.authForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password:  ['', Validators.required],
     })
   }
@@ -47,15 +48,16 @@ export class AuthComponent implements OnInit {
       // we need to send the request for signup
       this.authService.SignUp(this.authForm.value).subscribe(
         data => {
-          debugger;
+          // debugger;
           console.log(data);
           // this.jwtService.setToken(data.token);
           this.router.navigate(['/login']);
-          this.snackBar.open('You need to login first', 'Success',{
+          this.snackBar.open('User Created Successfully,You need to login first', 'Success',{
             duration: 5000
           })
-        }, err  => this.errorHandler(err, 'Failed to Signup'),
-        () => this.isLoadingResults = false
+        }
+        // , err  => this.errorHandler(err, 'Failed to Signup'),
+        // () => this.isLoadingResults = false
       )
 
     }
@@ -73,7 +75,8 @@ export class AuthComponent implements OnInit {
         this.snackBar.open('User Login Successfully', 'Success',{
           duration: 5000
         })
-      }, err => this.errorHandler(err, 'Failed to Login'),
+      }
+      , err => this.errorHandler(err, 'Failed to Login'),
       () => this.isLoadingResults = false
     
     
@@ -88,6 +91,10 @@ export class AuthComponent implements OnInit {
     this.snackBar.open(message, 'Error', {
       duration: 5000
     })
+  }
+
+  togglePasswordFieldType() {
+    this.password = !this.password   
   }
 
 
