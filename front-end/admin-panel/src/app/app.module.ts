@@ -11,9 +11,11 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,9 +25,9 @@ import { ToastrModule } from 'ngx-toastr';
     AuthModule,
     CoreModule,
     ToastrModule.forRoot(),
-    
-    
-   
+
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditAssociateResolveService } from './associates/services/edit-associate-resolve.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '../core/service/http-interceptor.service';
-import { EmployeeService } from './associates/components/file-upload/service/employee.service';
+
 
 
 
@@ -25,13 +25,13 @@ import { EmployeeService } from './associates/components/file-upload/service/emp
     AssociatesModule,
     OthersModule,
     ReactiveFormsModule,
-    
+
   ],
-  providers:[EditAssociateResolveService,EmployeeService,
+  providers:[EditAssociateResolveService,
   {
     provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
   }
   ],
-  
+
 })
 export class DashboardModule { }

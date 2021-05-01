@@ -1,14 +1,13 @@
 {
   "employee": [
     {
-      "id": 3,
-      "Name": "Kiran",
+      "Name": "Nayan",
       "address": "Pune",
       "phoneNo": 9876543210,
       "Qualification": "BE CS",
       "Experience": "Fresher",
       "Interest": "IT",
-      "date": "18/04/2021"
+      "id": 3
     },
     {
       "Name": "Anand",
