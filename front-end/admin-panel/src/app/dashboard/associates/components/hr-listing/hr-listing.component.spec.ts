@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociateFormComponent } from './associate-form.component';
+import { HrListingComponent } from './hr-listing.component';
 
-describe('AssociateFormComponent', () => {
-  let component: AssociateFormComponent;
-  let fixture: ComponentFixture<AssociateFormComponent>;
+describe('HrListingComponent', () => {
+  let component: HrListingComponent;
+  let fixture: ComponentFixture<HrListingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssociateFormComponent ]
+      declarations: [ HrListingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssociateFormComponent);
+    fixture = TestBed.createComponent(HrListingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

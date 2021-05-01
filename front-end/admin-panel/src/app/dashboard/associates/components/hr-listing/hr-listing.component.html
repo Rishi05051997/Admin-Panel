@@ -1,0 +1,73 @@
+<div class="flex-hr">
+  <h1>Hr Management</h1>
+  <button class="btn btn-primary upload" (click)="navigateToUpload()"  >Upload Resume</button>
+</div>
+
+<div class="usercontact-list">
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <!-- <th>Id</th> -->
+      <th>Employee Id</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Role</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>ACTION</th>
+      <th>ACTION</th>
+      <th>ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usercon of usercontacts  |  paginate : {
+      id: 'listing_pagination',
+      itemsPerPage: 5,
+      currentPage: page,
+      totalItems: totalRecords
+    }">
+      <td>{{usercon.empId}}</td>
+      <td>{{usercon.name}}</td>
+      <td>{{usercon.location}}</td>
+      <td>{{usercon.role}}</td>
+      <td>{{usercon.email}}</td>
+      <td>
+        <div *ngIf="usercon.status == true">
+          <strong>Yes</strong>
+        </div>
+        <div  *ngIf="usercon.status == false">
+          <strong>No</strong>
+        </div>
+      </td>
+
+
+       <td>
+        <button class=" btn btn-primary edit" (click)="editUserContact(usercon) ">Edit</button>
+       </td>
+
+      <td>
+        <button class="btn btn-danger ml-2 " (click)="deleteUserContact(usercon) ">Delete</button>
+      </td>
+      <td>
+        <button class="btn btn-success ml-2 view" (click)="viewUserContact(usercon) ">VIEW</button>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+  <div>
+  <pagination-controls
+                    id="listing_pagination"
+                    (pageChange)="page =$event"
+                    maxSize="9"
+                    directionLinks="true"
+
+                    responsive="true"
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page"
+                    screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+  </div>
+</div>
+

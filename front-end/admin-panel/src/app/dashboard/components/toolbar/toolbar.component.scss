@@ -2,7 +2,7 @@
 $iconWidth: 56px;
 
 
-span {
+.admin {
     font-family: 'Josefin Sans', sans-serif;
   }
 .sidenav-toggle {
@@ -10,12 +10,13 @@ span {
   padding: 0;
   margin: 8px;
   min-width: $iconWidth;
-  
+
 
   @media (max-width: 720px) {
     display: flex;
     align-items: center;
     justify-content: center;
+
   }
 
   mat-icon {
@@ -25,9 +26,37 @@ span {
     line-height: $iconWidth;
     color: white;
   }
+
+}
+.user {
+  position: absolute;
+  right: 70px;
+  font-size: 1rem;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+.user:hover {
+  color:red;
 }
 
 .menu-bar {
   position: absolute;
   right: 30px;
+}
+
+@media (max-Width: 720px){
+  .user {
+    position: absolute;
+    top: 30px;
+
+    right: 10px;
+
+    color: red;
+
+  }
+  .user:hover {
+    color: white;
+  }
 }

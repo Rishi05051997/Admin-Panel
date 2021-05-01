@@ -119,6 +119,36 @@
           "description": "All assciates",
           "parameters": [
             {
+              "name": "page",
+              "description": "set the page for pagination ",
+              "in": "query",
+              "type": "integer"
+            },
+            {
+              "name": "perPage",
+              "description": "define the limits for records ",
+              "in": "query",
+              "type": "integer"
+            },
+            {
+              "name": "filter",
+              "description": "Filter the Associateds by names ",
+              "in": "query",
+              "type": "string"
+            },
+            {
+              "name": "sortField",
+              "description": "Define the sortField for sorting i.e.., name,location ",
+              "in": "query",
+              "type": "string"
+            },
+            {
+              "name": "sortDir",
+              "description": "Define sort direction i.e.., desc ,asc  ",
+              "in": "query",
+              "type": "string"
+            },
+            {
               "name": "authorization",
               "description": "Access token to authorize the user ",
               "in": "header",
@@ -317,8 +347,26 @@
         }
       },
       "Associates": {
-        "type": "array",
-        "$ref": "#definitions/Associate"
+        "properties": {
+          "docs": {
+            "type": "array",
+            "$ref": "#definitions/Associate"
+          },
+          "total":{
+            "type": "integer"
+          },
+          "page":{
+            "type": "integer"
+          },
+          "pages":{
+            "type": "integer"
+          },
+          "limit":{
+            "type": "integer"
+          }
+
+        }
+       
       }
     }
   }

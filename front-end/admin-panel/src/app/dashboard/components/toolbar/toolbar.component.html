@@ -1,10 +1,11 @@
 <mat-toolbar  color="primary">
-    <button class="sidenav-toggle" mat-button (click)="toogle()"> 
+    <button class="sidenav-toggle" mat-button (click)="toogle()">
         <mat-icon class="mat-18">
             menu
         </mat-icon>
     </button>
-    <span>TCS HR Admin Panel</span>
+    <span class="admin">Admin Panel</span>
+    <span   class="user">{{user}}</span>
     <div class="menu-bar">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -14,10 +15,10 @@
                 <mat-icon>keyboard_backspace</mat-icon>
               <span>Logout</span>
             </button>
-    
-            
+
+
           </mat-menu>
     </div>
-    
-    
+
+
 </mat-toolbar>

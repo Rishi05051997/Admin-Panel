@@ -1,0 +1,73 @@
+<mat-card class="mat-elevation-z19">
+  <div class="col-md-10">
+    <h2 class="text-center">Edit Hr</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="empId">Employee Id:</label>
+        <input formControlName="empId" placeholder="Employee Id" name="empId" class="form-control" id="empId" type="number">
+        <div class="feedback-red" *ngIf="controls.empId.touched && controls.empId.invalid">
+          Employee Id is Required.
+        </div>
+        <div class="feedback-red" *ngIf="controls.empId.touched && controls.empId.errors?.pattern">
+          Only 7 numbers are allowed
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name" type="text">
+        <div class="feedback-red" *ngIf="controls.name.touched && controls.name.invalid">
+          Name is Required.
+        </div>
+        <div class="feedback-red" *ngIf="controls.name.touched && controls.name.errors?.pattern">
+          Only characters are allowed
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input formControlName="location" placeholder="location" name="location" class="form-control" id="location" type="text">
+        <div class="feedback-red" *ngIf="controls.location.touched && controls.location.invalid">
+          Location is Required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <input formControlName="role" placeholder="role" name="role" class="form-control" id="role" type="text">
+        <div class="feedback-red" *ngIf="controls.role.touched && controls.role.invalid">
+          Role is Required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Is Admin:</label>
+
+        <input type="checkbox" data-toggle="toggle" name="status" id="status" formControlName="status">
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
+        <div class="feedback-red" *ngIf="controls.email.touched && controls.email.invalid">
+          Email is Required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" formControlName="password" placeholder="password" name="password" class="form-control" id="password">
+        <div class="feedback-red" *ngIf="controls.password.touched && controls.password.invalid">
+          Password is Required.
+        </div>
+      </div>
+
+      <button button [disabled]="addForm.invalid" class="btn btn-success">Submit</button>
+      <button class="btn btn-danger ml-2 " (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+</mat-card>
+

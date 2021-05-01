@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoosePaginate from 'mongoose-paginate';
+
+const {Schema} = mongoose;
 const AssociateSchema = new Schema({
     empId: {
         type: String,
@@ -25,11 +27,9 @@ const AssociateSchema = new Schema({
         type: String,
         // required: true
     },
-    status: {
-        type: Boolean,
-        // required: true
-    },
+    status: false
 });
 
+AssociateSchema.plugin(mongoosePaginate);
 export default mongoose.model('Associate', AssociateSchema);
 

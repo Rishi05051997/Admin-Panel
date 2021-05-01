@@ -1,0 +1,67 @@
+{
+  "employee": [
+    {
+      "Name": "Nayan",
+      "address": "Pune",
+      "phoneNo": 9876543210,
+      "Qualification": "BE CS",
+      "Experience": "Fresher",
+      "Interest": "IT",
+      "id": 3
+    },
+    {
+      "Name": "Anand",
+      "address": "Mumbai",
+      "phoneNo": 8999123456,
+      "Qualification": "BE Civil",
+      "Experience": "1",
+      "Interest": "IT",
+      "id": 7
+    },
+    {
+      "Name": "Ashish",
+      "address": "Banglore",
+      "phoneNo": 7012345678,
+      "Qualification": "BE ",
+      "Experience": "0",
+      "Interest": "IT, Web Development, Full stack Development",
+      "id": 8
+    },
+    {
+      "Name": "Vyanktesh",
+      "address": "Ahmedabad",
+      "phoneNo": 9076543210,
+      "Qualification": "ME ",
+      "Experience": "0",
+      "Interest": "Web Development",
+      "id": 9
+    },
+    {
+      "Name": "Naren",
+      "address": "banglore",
+      "phoneNo": 9876542344,
+      "Qualification": "BE Civil",
+      "Experience": "0",
+      "Interest": "cybersecurity",
+      "id": 10
+    },
+    {
+      "Name": "Tejas Said",
+      "address": "Nashik",
+      "phoneNo": 9870563422,
+      "Qualification": "BE EN&TC",
+      "Experience": "0",
+      "Interest": "Na",
+      "id": 11
+    },
+    {
+      "Name": "Akash Thete",
+      "address": "Vani",
+      "phoneNo": 7076543210,
+      "Qualification": "BE Mech",
+      "Experience": "1",
+      "Interest": "C++, Python",
+      "id": 12
+    }
+  ]
+}

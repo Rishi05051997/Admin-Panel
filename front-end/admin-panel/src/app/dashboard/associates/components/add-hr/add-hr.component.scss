@@ -1,0 +1,17 @@
+.feedback-red{
+  color: red;
+}
+
+mat-card {
+  width: 500px;
+  margin: 1rem;
+
+}
+
+@media (max-Width: 720px) {
+  mat-card {
+    margin: -0.5rem 0 0 -1.35rem;
+    width: 300px;
+    // border-radius: 25px;
+  }
+}

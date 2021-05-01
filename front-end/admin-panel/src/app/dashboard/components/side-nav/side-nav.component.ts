@@ -9,13 +9,13 @@ import { Component, NgZone, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  private mediaMatcher: MediaQueryList 
+  private mediaMatcher: MediaQueryList
   = window.matchMedia('(max-width: 720px)');
 
   links = [
     {
       name: 'Hr-Managemennt',
-      url: 'associates'
+      url: 'hr'
     },
     // {
     //   name: 'Clients',
@@ -23,12 +23,12 @@ export class SideNavComponent implements OnInit {
     // },
   ]
 
-  constructor(zone: NgZone) { 
+  constructor(zone: NgZone) {
     let media = this.mediaMatcher;
     media.addEventListener('change',(mql:any) => {
       // console.log(mql);
       zone.run(() => media = mql);
-      
+
     })
   }
 
@@ -39,7 +39,7 @@ export class SideNavComponent implements OnInit {
     return this.mediaMatcher.matches;
   }
 
-  
-  
+
+
 
 }

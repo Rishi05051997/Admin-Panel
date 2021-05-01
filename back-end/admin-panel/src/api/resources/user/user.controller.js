@@ -14,12 +14,12 @@ export default {
         // validate the request
     //     const {email, value } = userService.validateSchema(req.body);
         const {email, password} = req.body;
-        if(!email) {
-            return res.status(400).json({err:'email is required field'});
-        }
-        if(!password) {
-            return res.status(400).json({err:'password is required field'});
-        }
+        // if(!email) {
+        //     return res.status(400).json({err:'email is required field'});
+        // }
+        // if(!password) {
+        //     return res.status(400).json({err:'password is required field'});
+        // }
         User.create({email, password})
         .then( user => {
             res.json({success: true, message:'User created successfully'});
