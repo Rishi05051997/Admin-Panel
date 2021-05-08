@@ -20,12 +20,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let usercon of usercontacts  |  paginate : {
+    <tr *ngFor="let usercon of usercontacts |  paginate : {
       id: 'listing_pagination',
       itemsPerPage: 5,
       currentPage: page,
       totalItems: totalRecords
-    }">
+     }">
       <td>{{usercon.empId}}</td>
       <td>{{usercon.name}}</td>
       <td>{{usercon.location}}</td>
@@ -42,14 +42,14 @@
 
 
        <td>
-        <button class=" btn btn-primary edit" (click)="editUserContact(usercon) ">Edit</button>
+        <button class=" btn btn-primary edit" [routerLink]="['/dashboard','edit', usercon._id]">Edit</button>
        </td>
 
       <td>
-        <button class="btn btn-danger ml-2 " (click)="deleteUserContact(usercon) ">Delete</button>
+        <button class="btn btn-danger ml-2 " (click)="removeEmployee(usercon,  usercon._id) ">Delete</button>
       </td>
       <td>
-        <button class="btn btn-success ml-2 view" (click)="viewUserContact(usercon) ">VIEW</button>
+        <button class="btn btn-success ml-2 view" [routerLink]="['/dashboard','view', usercon._id]">VIEW</button>
       </td>
     </tr>
   </tbody>

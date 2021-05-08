@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,17 +11,20 @@ import { HrServiceService } from '../share/hr-service.service';
   styleUrls: ['./add-hr.component.scss']
 })
 export class AddHrComponent implements OnInit {
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private userService: HrServiceService,
-    private toastr : ToastrService
-    ) { }
   addForm: FormGroup;
   @Output()
   createUsercontact = new EventEmitter<HrModel>();
 
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: HrServiceService,
+    private toastr : ToastrService,
+    private ngZone: NgZone,
+    ) { }
+
 
   ngOnInit() {
   this.addForm = this.formBuilder.group({
@@ -47,7 +50,18 @@ export class AddHrComponent implements OnInit {
   // }
 
   onSubmit() {
-    this.userService.create(this.addForm.value);
+    // this.userService.create(this.addForm.value);
+    if (!this.addForm.valid) {
+      return false;
+    } else {
+      this.userService.createEmployee(this.addForm.value).subscribe(
+        (res) => {
+          console.log('Employee successfully created!')
+          this.ngZone.run(() => this.router.navigateByUrl('/employees-list'))
+        }, (error) => {
+          console.log(error);
+        });
+    }
     this.toastr.success('New Hr Added Successfully..!!')
     this.router.navigate(['/dashboard', 'hr']);
   }

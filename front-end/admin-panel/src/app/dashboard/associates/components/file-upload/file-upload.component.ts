@@ -1,33 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
-
-
-
-
-
-export interface Dessert {
-  Name: string;
-  address: string;
-  phoneNo: number;
-  Qualification: string;
-  Experience: string;
-  Interest: string;
-  Date: Date;
-}
-
-// export interface Upload {
-//   Name: string;
-//   address: string;
-//   phoneNo: number;
-//   Qualification: string;
-//   Experience: string;
-//   Interest: string;
-
-//   date: Date;
-// }
+import { HrServiceService } from '../share/hr-service.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -36,42 +12,42 @@ export interface Dessert {
 
 })
 export class FileUploadComponent implements OnInit {
-
-  data: any=[];
-  file: any;
+  file: any=[];
   arrayBuffer:any;
   fileList:any =[];
-  uploadFormShow = true;
-  searchValue: string;
   uploadForm:FormGroup;
   showAssociate: FormGroup;
-  // employee:Dessert[];
-
   totalRecords: any;
   page: Number=1;
   tableShow: boolean;
-  uploadArray=[];
-  date: Date;
-  finalArray = [];
   spinner= false;
   noContent:string;
+  getUploadArray:any = [];
+  date;
+  @ViewChild('fileInput')
+  fileInput: ElementRef;
+  fileToUpload: File = null;
   constructor(
 
     private fb : FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService : HrServiceService
   ) { }
 
+
+
   ngOnInit(): void {
+    this.date = new Date().toISOString().slice(0, 10);
     this.createFileUpload();
     this.createShowForm();
-    // this.getEmployee();
-
-
-
+    this.getFileUpload()
   }
-  addfile(event)
-  {
+
+
+
+addfile(event) {
   this.file= event.target.files[0];
+  this.fileInput.nativeElement.innerText = (this.file.name)
   let fileReader = new FileReader();
   fileReader.readAsArrayBuffer(this.file);
   fileReader.onload = (e) => {
@@ -83,17 +59,8 @@ export class FileUploadComponent implements OnInit {
       var workbook = XLSX.read(bstr, {type:"binary"});
       var first_sheet_name = workbook.SheetNames[0];
       var worksheet = workbook.Sheets[first_sheet_name];
-
-
       var arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-      this.finalArray = XLSX.utils.sheet_to_json(worksheet,{raw:true});
-        console.log("arraylist hare: ",arraylist);
-        // this.fileList.push(arraylist);
-        console.log(this.fileList ,'wwwwwwwwwww');
-
-
-
-
+      this.uploadForm.patchValue({file:JSON.stringify(arraylist)});
   }
 }
 
@@ -119,87 +86,77 @@ get f(){
 
 onSubmit(){
 
+  for(var j=0; j<this.getUploadArray.length; j++){
+    if(this.uploadForm.controls.file.value === this.getUploadArray[j].file || this.uploadForm.controls.date.value === this.getUploadArray[j].date){
+      var id = this.getUploadArray[j]._id;
+      var data = this.uploadForm.value;
+      console.log(data);
+      if(confirm('Wheather you need to override this file?')){
+        return this.userService.updateFile(id, data).subscribe(
+          res => {
+            console.log(res);
+          }
+        )
+      }else {
 
-  console.log(this.uploadForm.value);
-  this.data.push(this.uploadForm.value);
-  this.fileList.push({
-    fileName: this.l.file.value,
-    date: this.l.date.value,
-    file: this.finalArray,
-  });
-//   let map = {};
-//   let result = false;
-//   for(var i=0;i<this.fileList.length; i++){
-//     if(map[this.fileList[i]]) {
-//       result = true;
-//       // terminate the loop
-//       break;
-//    }
-//    map[this.fileList[i]] = true;
-//   }
-//   if(result) {
-//     console.log('Array contains duplicate elements');
-//     alert('Either you  are uploading same file on same date or one file on same date');
-//     let uniqueChars = [];
-//     this.fileList.forEach((c:any) => {
-//     if (!uniqueChars.includes(c)) {
-//         uniqueChars.push(c);
-//         // this.uploadForm.reset();
-//     }
-// });
+          return null;
 
-// return console.log(uniqueChars);
-//  } else {
-//     console.log('Array does not contain duplicate elements');
-//  }
+      }
+    }
 
-  this.uploadForm.value;
 
-  this.uploadFormShow = false;
-  // debugger;
-  // this.removeDuplicates(this.data);
-  // this.removeDuplicates(this.fileList);
-  this.toastr.success('File Uploaded successfully...!!!')
+  }
+
+this.userService.uploadFile(this.uploadForm.value).subscribe(
+    data => {
+     this.toastr.success('File Uploaded successfully...!!!')
+    }, err => {
+      console.log(err);
+      this.toastr.error('Some thing went wrong')
+    }
+  )
+
 }
 
 
 showAss(){
-
-this.data.map( res => console.log(res))
-console.log(this.data + 'working here')
-
-for(var j=0; j<this.fileList.length; j++){
-  if((this.f.date1.value === this.fileList[j].date)){
-      this.spinner = true
-      setTimeout(() => {
-        this.spinner = false;
-        this.file = this.fileList[j].file;
-        this.tableShow = true;
-      }, 2000);
-      return console.log('date mmatched')
-    // }
-  }
-}
-  this.tableShow = false;
-  this.noContent = `No records found on this date ${this.f.date1.value}`
+  this.getFileUpload()
 }
 
 
 showAssociates(){
-  ///table show strategy
   this.tableShow = false;
-
-
-
-
-
 }
 
 show(){
   this.tableShow = true;
 }
 
-
+getFileUpload(){
+  this.userService.getFileUploads().subscribe(
+    res => {
+      console.log(res + 'All files are coming');
+      const fa:any = res;
+      for(var i=0; i<fa.Msg.length;i++){
+        const file1 = fa.Msg[i];
+        this.getUploadArray.push(file1);
+        var array:any = []
+        array = fa.Msg[i].file;
+        if(this.f.date1.value === fa.Msg[i].date){
+          this.spinner = true
+          setTimeout(() => {
+            this.spinner = false;
+            this.file = (JSON.parse(array));
+            this.tableShow = true;
+          }, 2000);
+          return console.log('date mmatched')
+        }
+      }
+      this.tableShow = false;
+      this.noContent = `No records found on this date ${this.f.date1.value}`
+    }
+  )
+}
 
 sortData(sort: Sort) {
   const data = this.file.slice();
@@ -221,30 +178,6 @@ sortData(sort: Sort) {
     }
   });
 }
-
-
-
-
-removeDuplicates(array) {
-  debugger;
-  let x = {};
-  array.forEach((i) => {
-    if(!x[i]) {
-      x[i] = true
-    }
-  })
-  return Object.keys(x)
-}
-
-
-
-
-
-
-
-
-
-
 
 }
 

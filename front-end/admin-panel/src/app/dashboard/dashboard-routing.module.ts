@@ -13,28 +13,30 @@ const routes: Routes = [
   {
     path:'',
     component:DashboardComponent,
+    canActivate: [AuthGuardService],
 
     children: [
 
       {
         path:'hr',
         component: HrListingComponent,
+        canActivateChild: [AuthGuardService],
 
       },
       {
         path:'add',
         component: AddHrComponent,
-
+        canActivateChild: [AuthGuardService],
       },
       {
-        path:'edit',
+        path:'edit/:id',
         component: EditHrComponent,
-
+        canActivateChild: [AuthGuardService],
       },
       {
-        path:'view',
+        path:'view/:id',
         component: ViewHrComponent,
-
+        canActivateChild: [AuthGuardService],
       },
       // {
       //   path:'associates/:id/view',
@@ -52,7 +54,7 @@ const routes: Routes = [
       {
         path:'upload',
         component: FileUploadComponent,
-
+        canActivateChild: [AuthGuardService],
       },
 
       // {
@@ -63,8 +65,8 @@ const routes: Routes = [
 
       {
         path:'**',
-        redirectTo: "associates",
-
+        redirectTo: "hr",
+        canActivateChild: [AuthGuardService],
       },
 
     ]

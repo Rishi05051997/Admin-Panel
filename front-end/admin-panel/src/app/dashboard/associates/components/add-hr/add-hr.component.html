@@ -1,8 +1,9 @@
 <mat-card class="mat-elevation-z19">
-  <div class="col-md-10">
-    <h2 class="text-center">Add New Hr</h2>
+  <div class="col-md-10 inner-mat">
+    <h2 class="text-center">Add New</h2>
+    <hr>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
+      <div class="form-group mt-3">
         <label for="empId">Employee Id:</label>
         <input formControlName="empId" placeholder="Employee Id" name="empId" class="form-control" id="empId" type="number">
         <div class="feedback-red" *ngIf="controls.empId.touched && controls.empId.invalid">
@@ -70,5 +71,7 @@
     </form>
   </div>
 </mat-card>
+
+
 
 

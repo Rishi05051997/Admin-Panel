@@ -1,13 +1,21 @@
 <mat-card>
+  <div class="m-3">
     <h2>Please upload Excell file </h2>
+  </div>
+
     <!-- <form [formGroup]="uploadForm"> -->
     <form [formGroup]="uploadForm" >
-      <div class="col-md-3 form-group">
-        <input type="file" class="form-control" formControlName="file"  (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+      <div class="col-md-3 ml-3 form-group">
+        <div class="custome-file">
+          <input type="file"  class="custom-file-input" name="file"  (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <label class="custom-file-label" #fileInput for="customInput">Choose file...</label>
+        </div>
+
       </div>
+
       <div class="col-md-3 form-group">
             <label class="form-label">Date</label>
-            <input type="date" class="form-control"   formControlName="date" value="Mark" >
+            <input type="date" class="form-control"   formControlName="date" value="Mark" max="{{this.date}}" >
 
       </div><br>
       <button class="ml-3 btn btn-primary" [disabled]="!uploadForm.valid" (click)="onSubmit()">Add</button>
@@ -18,14 +26,11 @@
         <button class="btn btn-primary mt-5 ml-3" (click)="show()">View Associate</button>
       <div class="col-md-3 form-group">
         <label class="form-label mt-3">Date</label>
-        <input type="date" class="form-control" formControlName="date1" (click)="showAssociates()"   value="Mark" >
+        <input type="date" class="form-control" formControlName="date1" (click)="showAssociates()" max="{{this.date}}"  value="Mark" >
         <div class="col-md-3 position-relative">
-          <!-- <label for="search" class="form-label" style="text-align: right;">Search By Names</label> -->
-          <!-- <div class="col-sm-8">
-            <input type="text" [(ngModel)]="searchValue" class="form-control" id="search">
-          </div> -->
 
-        </div><br>
+
+      </div><br>
         <button class='btn btn-success' (click)="showAss()">Show</button>
         <div class="spinner" *ngIf="spinner">
           <mat-spinner ></mat-spinner>
@@ -34,7 +39,7 @@
           {{noContent}}
         </div>
         <!-- <div *ngIf="f.date1.value ==  l.date.value"> -->
-        <div *ngIf="tableShow">
+        <div *ngIf="tableShow" >
           <table  id="customers" class="mt-5 table table-striped" matSort (matSortChange)="sortData($event)">
               <tbody>
                 <tr>
@@ -52,7 +57,7 @@
                     itemsPerPage: 5,
                     currentPage: page,
                     totalItems: totalRecords
-                  } | searchfilter:searchValue">
+                  }">
                     <td>{{value.Name}}</td>
                     <td>{{value.address}}</td>
                     <td>{{value.phoneNo}}</td>
@@ -83,110 +88,10 @@
       </form>
 
     </div>
-      <!-- <div>
-        <div *ngIf="date">
 
-          <div class="form-group-row">
-            <label for="search" class="col-sm-2-col-form-label" style="text-align: right;">Search By Names</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="searchValue" class="form-control" id="search">
-            </div>
-
-          </div>
-
-          <table  id="customers" class="mt-5 ">
-              <tbody>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone No</th>
-                    <th>Qualification</th>
-                    <th>Experience</th>
-                    <th>Interest</th>
-
-                  </tr>
-                  <tr *ngFor="let value of fileList | searchfilter:searchValue">
-                    <td>{{value.Name}}</td>
-                    <td>{{value.address}}</td>
-                    <td>{{value.phoneNo}}</td>
-                    <td>{{value.Qualification}}</td>
-                    <td>{{value.Experience}}</td>
-                    <td>{{value.Interest}}</td>
-
-                  </tr>
-              </tbody>
-          </table>
-
-        </div>
-
-
-      </div> -->
-    <!-- </form> -->
 
 
 </mat-card>
 <br>
 <br>
-<!-- <mat-card>
-  <div>
-    <h3><a [routerLink]="['/dashboard','upload', 'add']"  >+Add New Associate</a></h3>
-  </div>
 
-  <div>
-    <div class="col-md-5 position-relative">
-      <label for="search" class="form-label" style="text-align: right;">Search By Names</label>
-      <div class="col-sm-8">
-        <input type="text" [(ngModel)]="searchValue" class="form-control" id="search">
-      </div>
-
-    </div><br>
-
-
-    <table  id="customers" class="mt-5 table table-striped" matSort (matSortChange)="sortData($event)">
-        <tbody>
-          <tr>
-              <th mat-sort-header="name">Name</th>
-              <th>Address</th>
-              <th>Phone No</th>
-              <th>Qualification</th>
-              <th mat-sort-header="exp">Experience</th>
-              <th>Interest</th>
-              <th>Action</th>
-
-            </tr>
-            <tr *ngFor="let value of employee |  paginate : {
-              id: 'listing_pagination',
-              itemsPerPage: 5,
-              currentPage: page,
-              totalItems: totalRecords
-            } | searchfilter:searchValue">
-              <td>{{value.Name}}</td>
-              <td>{{value.address}}</td>
-              <td>{{value.phoneNo}}</td>
-              <td>{{value.Qualification}}</td>
-              <td>{{value.Experience}}</td>
-              <td>{{value.Interest}}</td>
-              <td style="cursor: pointer;" class="btn btn-danger" (click)="deleteEmployee(value.id)">DELETE</td>
-              <td   style="cursor: pointer;" class="btn btn-success" [routerLink]="['/dashboard','upload','edit',value.id]" routerLinkActive="router-link-active" >EDIT</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-      <pagination-controls  id="listing_pagination"
-                      (pageChange)="page =$event"
-
-                      maxSize="9"
-                      directionLinks="true"
-
-                      responsive="true"
-                      previousLabel="Previous"
-                      nextLabel="Next"
-                      screenReaderPaginationLabel="Pagination"
-                      screenReaderPageLabel="page"
-                      screenReaderCurrentLabel="You're on page">
-</pagination-controls>
-    </div>
-
-  </div>
-
-</mat-card> -->

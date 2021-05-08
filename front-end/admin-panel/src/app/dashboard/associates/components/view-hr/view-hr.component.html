@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z19">
   <div class="btn-flex">
     <mat-card-title>Hr Details</mat-card-title>
-  <button *ngIf="usercontact.status == true" style="cursor: pointer;" class="btn btn-success add-new" [routerLink]="['/dashboard','add']" >Add New Hr</button>
+  <button *ngIf="usercontact.status === true" style="cursor: pointer;" class="btn btn-success add-new" [routerLink]="['/dashboard','add']" >Add New Hr</button>
 
   </div>
 
@@ -48,7 +48,7 @@
     </table>
   </mat-card-content>
   <mat-card-actions>
-    <button  class="btn btn-primary" [routerLink]="['/dashboard','edit']">Edit</button>
+    <button  class="btn btn-primary" [routerLink]="['/dashboard','edit',usercontact._id]">Edit</button>
     <!-- <button  class="btn btn-light" [routerLink]="['dashboard','associates']">Back</button> -->
     <!-- <button  class="btn btn-success" >Change Password</button> -->
     <button class="btn btn-danger ml-5 " (click)="onCancel()">Cancel</button>

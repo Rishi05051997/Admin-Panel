@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditAssociateResolveService } from './associates/services/edit-associate-resolve.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '../core/service/http-interceptor.service';
+import { AuthGuardService } from '../core/service/auth-guard.service';
 
 
 
@@ -27,7 +28,7 @@ import { HttpInterceptorService } from '../core/service/http-interceptor.service
     ReactiveFormsModule,
 
   ],
-  providers:[EditAssociateResolveService,
+  providers:[EditAssociateResolveService, AuthGuardService,
   {
     provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
   }
