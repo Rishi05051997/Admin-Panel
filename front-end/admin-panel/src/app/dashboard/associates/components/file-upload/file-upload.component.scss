@@ -1,3 +1,16 @@
+.custom-file-input.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+
+.custom-file-input {
+  white-space: nowrap;
+}
+
+
 #customers {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;

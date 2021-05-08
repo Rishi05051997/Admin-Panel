@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
   email;
   pass;
   associates;
-  usercontacts: HrModel[];
+  usercontacts: any;
   user: boolean = true;
   constructor(
     private fb : FormBuilder,
@@ -41,7 +41,11 @@ export class AuthComponent implements OnInit {
     this.initForm();
     // this.title = this.router.url === '/login' ? 'Login' : 'Signup';
     // this.getAssociates();
-    this.usercontacts = this.ucs.getall();
+    this.ucs.getEmployees().subscribe(
+      data => {
+        this.usercontacts = data;
+      }
+    );
     console.log(this.usercontacts);
   }
 

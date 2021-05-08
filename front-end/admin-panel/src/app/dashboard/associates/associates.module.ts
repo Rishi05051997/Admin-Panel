@@ -11,6 +11,7 @@ import { HrListingComponent } from './components/hr-listing/hr-listing.component
 import { AddHrComponent } from './components/add-hr/add-hr.component';
 import { EditHrComponent } from './components/edit-hr/edit-hr.component';
 import { ViewHrComponent } from './components/view-hr/view-hr.component';
+import { HrServiceService } from './components/share/hr-service.service';
 
 
 
@@ -31,6 +32,6 @@ import { ViewHrComponent } from './components/view-hr/view-hr.component';
     FileUploadComponent,
 
   ],
-  providers: [AssociateService],
+  providers: [AssociateService, HrServiceService],
 })
 export class AssociatesModule { }

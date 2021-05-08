@@ -10,89 +10,84 @@ import { HrServiceService } from '../share/hr-service.service';
   styleUrls: ['./hr-listing.component.scss']
 })
 export class HrListingComponent implements OnInit {
-  usercontacts: HrModel[]; // Array<string>
+  usercontacts: any=[]; // Array<string>
   usercont: HrModel;
   page: Number=1;
   totalRecords: any;
   constructor(
-    private ucs: HrServiceService,
+    private userService: HrServiceService,
     private router: Router,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+
     ) {
   }
 
-  editUserContact(usercontact: HrModel) {
-    console.log(usercontact);
-    localStorage.removeItem('editUserId');
-    localStorage.setItem('editUserId', usercontact.id.toString());
-    this.router.navigate(['/dashboard','edit']);
-    // this.ucs.update(usercontact);
-  }
-
-  deleteUserContact(usercontact: HrModel) {
-    console.log(usercontact);
-
-    this.ucs.delete(usercontact);
-    this.toastr.success('User deleted successfully');
-    const array:any = JSON.parse(localStorage.getItem('token'));
-    if(usercontact.email === array.email){
-      localStorage.removeItem('token');
-    }
-
-  }
-
+  /////////
   ngOnInit() {
-    console.log('usercontact:init');
-    this.usercontacts = this.ucs.getall();
-    console.log(this.usercontacts);
-    this.validateUser();
+    // console.log('usercontact:init');
+    // this.usercontacts = this.ucs.getall();
+    // console.log(this.usercontacts);
+    this.readEmployee();
+    // this.validateUser();
   }
 
-  viewUserContact(usercontact: HrModel){
-    console.log(usercontact);
-    localStorage.removeItem('viewUserId');
-    localStorage.setItem('viewUserId', usercontact.id.toString());
-    this.router.navigate(['/dashboard','view']);
+  readEmployee(){
+    this.userService.getEmployees().subscribe((data) => {
+      console.log(data)
+     this.usercontacts = data;
+    })
   }
 
-
-  validateUser(){
-    var array = JSON.parse(localStorage.getItem('token'));
-    console.log(array);
-    // for(var i=0;i<arr.length; i++){
-      // debugger;
-      // if(array.email === 'vrushabh@gmail.com'){
-      //   // debugger;
-      //   this.user = 'Admin'
-      // }else{
-      //   this.user = 'Normal'
-      // }
-     for(var i=0; i<this.usercontacts.length; i++){
-       console.log(this.usercontacts[i].email)
-      //  debugger;
-       if(array.email === this.usercontacts[i].email){
-        // if(this.controls.status.value === true){
-        //   this.user = true;
-        // }else {
-        //   this.user = false;
-        // }
-
-         return null;
-       }
-
-
-      //  else {
-      //    alert('Something went wrong')
-      //  }
-
-     }
-    //  this.usercontacts.push(array);
-
-
-    // }
+  removeEmployee(employee, index) {
+    if(window.confirm('Are you sure?')) {
+        this.userService.deleteEmployee(employee._id).subscribe((data) => {
+          this.usercontacts.splice(index, 1);
+        }
+      )
+    }
   }
+
   navigateToUpload(){
     return this.router.navigate(['dashboard', 'upload'])
   }
+
+  // validateUser(){
+  //   var array = JSON.parse(localStorage.getItem('token'));
+  //   console.log(array);
+  //   // for(var i=0;i<arr.length; i++){
+  //     // debugger;
+  //     // if(array.email === 'vrushabh@gmail.com'){
+  //     //   // debugger;
+  //     //   this.user = 'Admin'
+  //     // }else{
+  //     //   this.user = 'Normal'
+  //     // }
+  //    for(var i=0; i<this.usercontacts.length; i++){
+  //      console.log(this.usercontacts[i].email)
+  //     //  debugger;
+  //      if(array.email === this.usercontacts[i].email){
+  //       // if(this.controls.status.value === true){
+  //       //   this.user = true;
+  //       // }else {
+  //       //   this.user = false;
+  //       // }
+
+  //        return null;
+  //      }
+
+
+  //     //  else {
+  //     //    alert('Something went wrong')
+  //     //  }
+
+  //    }
+  //   //  this.usercontacts.push(array);
+
+
+  //   // }
+  // }
+
+
+
 
 }
