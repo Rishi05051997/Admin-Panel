@@ -1,0 +1,25 @@
+{
+  "location":
+  [
+    {
+      "name":"nashik",
+      "latitude":19.997454,
+      "longitude":73.789803
+    },
+    {
+      "name":"banglore",
+      "latitude":12.972442,
+      "longitude":12.972442
+    },
+    {
+      "name":"trevandrum",
+      "latitude":8.524139,
+      "longitude":76.936638
+    },
+    {
+      "name":"pune",
+      "latitude":18.516726,
+      "longitude":73.856255
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+.feedback-red{
+  color: red;
+}
+
+mat-card {
+  width: 500px;
+  margin: 1rem;
+
+}
+mat-card .inner-mat {
+  margin: 2.5rem;
+}
+mat-card .text-center {
+  // border-radius: 10px;
+  // border: 1px solid red;
+  text-decoration: underline;
+}
+mat-card hr {
+  margin: 2rem 0;
+
+  background: red;
+}
+
+@media (max-Width: 720px) {
+  mat-card {
+    margin: -0.5rem 0 0 -1.35rem;
+    width: 300px;
+    // border-radius: 25px;
+    .inner-mat {
+      margin: 0;
+    }
+  }
+}
