@@ -1,129 +1,144 @@
 const express = require('express');
-const app = express();
 const fileUpload = express.Router();
-// var express = require('express');
-// var _router = express.Router();
-var multer = require('multer');
-var path = require('path');
-
-// fileUpload model
-let fileUploadSchema = require('../models/file-upload-schema');
 
 
-var store = multer.diskStorage({
-    destination:function(req,file,cb){
-        cb(null, './uploads');
-    },
-    filename:function(req,file,cb){
-        cb(null, Date.now()+'.'+file.originalname);
-    }
-});
 
-var upload = multer({storage: store})
+// Use MongoDB
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
+// The database variable
+var database;
+// The users collection
+var FILE_UPLOAD_COLLECTION = "FILE-UPLOADS";
+
+
+mongodb.MongoClient.connect('mongodb://localhost:27017/employees',
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+    }, function (error, file) {
+
+        // Check if there are any problems with the connection to MongoDB database.
+        if (error) {
+            console.log(error);
+            process.exit(1);
+        }
+
+        // Save database object from the callback for reuse.
+        database = file.db();
+        // console.log("Database connection done.");
+
+        
+    });
 
 // get all files
 fileUpload.get('/allFiles', function(req, res, next) {
-//    const fileUpload =  fileUploadSchema.find(  );
-//    res.status(200).json({ fileUpload });
-
-   fileUploadSchema.find({}, (err, fileUpload)=>{
-    if(err){
-        res.status(500).json({errMsg:err});
+  database.collection(FILE_UPLOAD_COLLECTION).find({}).toArray(function (error, data) {
+    if (error) {
+        manageError(res, err.message, "Failed to get files.");
     } else {
-        res.status(200).json({Msg:fileUpload})
+        res.status(200).json({Msg:data});
     }
-})
+});
+
+//    fileUploadSchema.find({}, (err, fileUpload)=>{
+//     if(err){
+//         res.status(500).json({errMsg:err});
+//     } else {
+//         res.status(200).json({Msg:fileUpload})
+//     }
+// })
 });
 
 // Add Employee
 fileUpload.post('/files', (req, res, next) => {
-    fileUploadSchema.create(req.body, (error, data) => {
-      if (error) {
-        return next(error)
+  var file = req.body;
+  database.collection(FILE_UPLOAD_COLLECTION).insertOne(file, function (err, doc) {
+      if (err) {
+          manageError(res, err.message, "Failed to post file.");
       } else {
-        res.json(data);
+          res.status(201).json(doc.ops[0]);
       }
-    })
+    });
+    // fileUploadSchema.create(req.body, (error, data) => {
+    //   if (error) {
+    //     return next(error)
+    //   } else {
+    //     res.json(data);
+    //   }
+    // })
   });
 
-// // post data on submit button
-// fileUpload.post('/files', upload.single('file'), (req, res, next) => {
-   
-//     if(!req.file) {
-//         return res.status(500).send({ message: 'Upload fail'});
-//     } else {
-//         // co
-//         req.body.file = 'http://192.168.0.7:4000/files/' + req.file.filename;
-//         fileUploadSchema.create(req.body,  (err, gallery) => {
-      
-//             if (err) {
-//                 console.log(err);
-//                 return next(err);
-//             }
-//             res.json(gallery);
-//         });
-//     }
-// });
+
 
 // get data by id
 fileUpload.get('/:id', function(req, res, next) {
-    
-    fileUploadSchema.findById(req.params.id, function (err, gallery) {
-        if (err) return next(err);
-        res.json(gallery);
-    });
+  database.collection(FILE_UPLOAD_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+    if (err) {
+        manageError(res, err.message, "Failed to delete user.");
+    } else {
+        res.status(200).json(result);
+    }
+})
+    // fileUploadSchema.findById(req.params.id, function (err, gallery) {
+    //     if (err) return next(err);
+    //     res.json(gallery);
+    // });
 });
 
 
-// Delete employee
+// Delete files
 fileUpload.delete('/delete/:id',(req, res, next) => {
-    fileUploadSchema.findOneAndRemove(req.params.id, (error, data) => {
-      if (error) {
-        return next(error);
-      } else {
-        res.status(200).json({
-          msg: data
-        })
-      }
-    })
+  database.collection(FILE_UPLOAD_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+    if (err) {
+        manageError(res, err.message, "Failed to delete product.");
+    } else {
+        res.status(200).json(req.params.id);
+    }
+});
+    // fileUploadSchema.findOneAndRemove(req.params.id, (error, data) => {
+    //   if (error) {
+    //     return next(error);
+    //   } else {
+    //     res.status(200).json({
+    //       msg: data
+    //     })
+    //   }
+    // })
   })
 
 
 // Update files
 fileUpload.put(('/update/:id'),(req, res, next) => {
-  fileUploadSchema.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
-    if (error) {
-      console.log(error)
-      return next(error);
-     
+  database.collection(USERS_COLLECTION).updateOne({ _id: new ObjectID(req.params.id) },{
+    $set : req.body
+}, function (err, result) {
+    if (err) {
+        manageError(res, err.message, "Failed to update File.");
     } else {
-      res.json(data)
-      console.log('Data updated successfully')
+        res.status(200).json(result.modifiedCount);
     }
-  })
+});
+  // fileUploadSchema.findByIdAndUpdate(req.params.id, {
+  //   $set: req.body
+  // }, (error, data) => {
+  //   if (error) {
+  //     console.log(error)
+  //     return next(error);
+     
+  //   } else {
+  //     res.json(data)
+  //     console.log('Data updated successfully')
+  //   }
+  // })
 })
 
+// Errors handler.
+function manageError(res, reason, message, code) {
+  console.log("Error: " + reason);
+  res.status(code || 500).json({ "error": message });
+}
 
-
-// // post data on image input
-// fileUpload.post('/imageInputFile', upload.single('file'), function(req, res, next) {
-//   if(!req.file) {
-//       return res.status(500).send({ message: 'Upload fail'});
-//   } else {
-//       req.body.file = 'http://192.168.0.7:4000/uploads/' + req.file.filename;
-//       fileUploadSchema.create(req.body, function (err, gallery) {
-//           console.log(req.body);
-//           if (err) {
-//               console.log(err);
-//               res.status(500).json({err:'wrong'});
-//               return next(err);
-//           }
-//          console.log('uploaded success')
-//           res.status(200).json({gallery});
-//       });
-//   }
-// }); 
+ 
 
 module.exports = fileUpload;

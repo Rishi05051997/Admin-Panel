@@ -6,7 +6,7 @@
                     <mat-spinner mode="determinate"  color="accent"></mat-spinner>
                 </div>
             </div>
-            
+
             <mat-card-title>{{title}}</mat-card-title>
             <mat-card-content>
                 <form class="form-container" [formGroup]="authForm"  (ngSubmit)="onSubmit()">
@@ -14,7 +14,7 @@
                     <mat-form-field class="mat-Input" appearance="fill" >
                         <!-- <mat-label>Employee Id</mat-label> -->
                         <input matInput placeholder="email"   formControlName="email">
-                        
+
                         <mat-error *ngIf="Controls.email.touched &&  Controls.email.invalid">EmailId is required</mat-error>
                         <mat-error *ngIf="Controls.email.touched && Controls.email.errors?.email">Please enter valid email id</mat-error>
                     </mat-form-field><br>
@@ -23,18 +23,18 @@
                         <input matInput placeholder="password" [type]="password ? 'text' : 'password'" formControlName="password">
                         <span class="eye"><img src="assets/images/eye.svg" height="20px" width="20px" (click)="togglePasswordFieldType()"></span>
                         <mat-error *ngIf="Controls.password.touched &&  Controls.password.invalid">Password is required</mat-error>
-                       
+
                     </mat-form-field><br>
                     <div class="btn-mat">
-                        <button 
-                       
-                            mat-raised-button type="submit" 
-                            [disabled]="!authForm.valid" 
+                        <button
+
+                            mat-raised-button type="submit"
+                            [disabled]="!authForm.valid"
                             (click)="onSubmit()" color="primary">
                             {{title}}
                         </button>
-                        
-                        
+
+
                     </div>
                 </form>
                 <!-- <div class="alternative" *ngIf="title === 'Login'">
@@ -45,11 +45,11 @@
                     <p>Already have An Account please Log In 👇</p>
                    <button mat-raised-button [routerLink]="['/login']" color="primary">Login</button>
                 </div> -->
-                
-            
-                
+
+
+
             </mat-card-content>
         </mat-card>
-        
+
     </div>
 </div>

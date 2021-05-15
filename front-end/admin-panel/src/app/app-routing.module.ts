@@ -5,7 +5,7 @@ import { AuthComponent } from './auth/auth.component';
 import { NoAuthGuardService } from './core/service/no-auth-guard.service';
 
 
-const routes: Routes = 
+const routes: Routes =
 [
   {
     path:'',
@@ -18,18 +18,12 @@ const routes: Routes =
 
   },
   {
-    path:'signup',
-    component: AuthComponent,
-    canActivate: [NoAuthGuardService]
-  },
-
-  {
-    path:'dashboard', 
+    path:'dashboard',
     loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path:'**',
-    redirectTo:'associate-builder'
+    redirectTo:'dashboard'
   }
 ];
 

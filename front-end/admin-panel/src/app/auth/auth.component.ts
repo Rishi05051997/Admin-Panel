@@ -2,14 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { remove } from 'lodash';
-import { ToastrService } from 'ngx-toastr';
-import { throwError } from 'rxjs';
-import { JwtService } from '../core/service/jwt.service';
-import { AuthService } from '../core/services/auth.service';
-import { HrModel } from '../dashboard/associates/components/share/hr-model';
-import { HrServiceService } from '../dashboard/associates/components/share/hr-service.service';
-import { AssociateService } from '../dashboard/associates/services/associate.service';
+import { UsersServiceService } from '../dashboard/users/components/share/users-service.service';
+
 
 @Component({
   selector: 'app-auth',
@@ -21,37 +15,33 @@ export class AuthComponent implements OnInit {
   title = 'Login';
   isLoadingResults: boolean = false;
   password: boolean;
-  email;
-  pass;
-  associates;
   usercontacts: any;
-  user: boolean = true;
+
   constructor(
     private fb : FormBuilder,
-    private authService: AuthService,
-    private jwtService: JwtService,
     private router : Router,
     private snackBar : MatSnackBar,
-    private associateService: AssociateService,
-    private ucs: HrServiceService,
-    private toastr: ToastrService
+    private _userService: UsersServiceService,
+
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    // this.title = this.router.url === '/login' ? 'Login' : 'Signup';
-    // this.getAssociates();
-    this.ucs.getEmployees().subscribe(
-      data => {
+
+    this._userService.getEmployees().subscribe(
+      data =>
+      {
+        console.log(data);
         this.usercontacts = data;
       }
-    );
-    console.log(this.usercontacts);
+    )
+    // console.log(this.usercontacts);
   }
 
 
   initForm() {
-    this.authForm = this.fb.group({
+    this.authForm = this.fb.group
+    ({
       email: ['', [Validators.required, Validators.email]],
       password:  ['', Validators.required],
 
@@ -78,66 +68,12 @@ export class AuthComponent implements OnInit {
               })
 
             }
-
           }
-
-
-
-
-
         }
         this.snackBar.open('Invalid Credentials', 'Error', {
-          duration: 2000
+            duration: 2000
         })
       }
-      // if(this.user === true){
-
-      //   return  null;
-
-      // }
-      // if(this.user === false){
-
-      //   return  alert('Invalid action.');
-
-      // }
-
-      ////
-      // if(this.authForm.value){
-      //   this.usercontacts.map( res => {
-      //     if((this.authForm.controls.email.value == res.email ) && (this.authForm.controls.password.value == res.password )){
-      //       localStorage.setItem('token', JSON.stringify(this.authForm.value));
-      //       this.router.navigate(['/dashboard', 'hr']);
-      //       // this.snackBar.open('user login successfull', 'Success', {
-      //       //   duration: 2000
-      //       // })
-      //     }else if (this.authForm.controls.email.value !== res.email){
-      //       this.snackBar.open('Invalid Credentials', 'Error', {
-      //         duration: 2000
-      //       })
-
-      //     }
-      //   })
-      // }
-
-
-
-      // this.associateService.loginAssociate(this.authForm.value).subscribe(res => {
-
-
-      }
-
-    // }
-      showError(){
-
-      }
-
-
-  private errorHandler(error:any, message:any){
-    this.isLoadingResults = false;
-    console.log(error);
-    this.snackBar.open(message, 'Error', {
-      duration: 5000
-    })
   }
 
   togglePasswordFieldType() {
