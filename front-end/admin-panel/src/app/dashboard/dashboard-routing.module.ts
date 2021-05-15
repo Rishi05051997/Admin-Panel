@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from '../core/service/auth-guard.service';
-import { AddHrComponent } from './associates/components/add-hr/add-hr.component';
-import { EditHrComponent } from './associates/components/edit-hr/edit-hr.component';
-import { FileUploadComponent } from './associates/components/file-upload/file-upload.component';
-import { HrListingComponent } from './associates/components/hr-listing/hr-listing.component';
-import { ViewHrComponent } from './associates/components/view-hr/view-hr.component';
+import { AddUserComponent } from './users/components/add-user/add-user.component';
+import { EditUserComponent } from './users/components/edit-user/edit-user.component';
+import { FileUploadComponent } from './users/components/file-upload/file-upload.component';
+import { UsersListingComponent } from './users/components/users-listing/users-listing.component';
+import { ViewUserComponent } from './users/components/view-user/view-user.component';
 import { DashboardComponent } from './dashboard.component';
 
 
@@ -19,49 +19,32 @@ const routes: Routes = [
 
       {
         path:'hr',
-        component: HrListingComponent,
+        component: UsersListingComponent,
         canActivateChild: [AuthGuardService],
 
       },
       {
         path:'add',
-        component: AddHrComponent,
+        component: AddUserComponent,
         canActivateChild: [AuthGuardService],
       },
       {
         path:'edit/:id',
-        component: EditHrComponent,
+        component: EditUserComponent,
         canActivateChild: [AuthGuardService],
       },
       {
         path:'view/:id',
-        component: ViewHrComponent,
+        component: ViewUserComponent,
         canActivateChild: [AuthGuardService],
       },
-      // {
-      //   path:'associates/:id/view',
-      //   component: AssociateViewComponent,
 
-      //   resolve: {
-      //     associate: EditAssociateResolveService
-      //   }
-      // },
-      // {
-      //   path:'associates/:id',
-      //   component: AssociateFormComponent,
-
-      // },
       {
         path:'upload',
         component: FileUploadComponent,
         canActivateChild: [AuthGuardService],
       },
 
-      // {
-      //   path:'clients',
-      //   component: OthersListingComponent,
-
-      // },
 
       {
         path:'**',

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap');
+mat-card {
+  padding: 3rem;
+  margin: 0 400px;
+  width: 300px;
+  border-radius: 30px;
+}
+mat-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  text-decoration: underline;
+  color: purple;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.add-new {
+  margin: 0.8rem 2.6rem
+}
+
+
+@media (max-Width: 720px) {
+  mat-card {
+    margin: 0 0 0 -1.25rem;
+  }
+}
