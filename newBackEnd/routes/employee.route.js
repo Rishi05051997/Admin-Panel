@@ -59,7 +59,7 @@ employeeRoute.route('/update/:id').put((req, res, next) => {
 
 // Delete employee
 employeeRoute.route('/delete/:id').delete((req, res, next) => {
-  Employee.findOneAndRemove(req.params.id, (error, data) => {
+  Employee.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       return next(error);
     } else {
