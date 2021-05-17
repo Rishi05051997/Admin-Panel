@@ -61,6 +61,24 @@ app.use(cors());
 // app.use(express.static('/uploads'));
 // app.use('/api', employeeRoute);
 // app.use('/api/file-upload', filesRoute);
+//// login api
+app.post('/api/login', (req, res, next)=> {
+    let userData = req.body;
+    database.collection(USERS_COLLECTION).findOne({email: req.body.email}, (err, user)=> {
+        if(err){
+            return res.status(401).json(err);
+        }else {
+            if(!user){
+                res.status(401).send('Invalid Email');
+            }else if(user.password !== userData.password){
+                res.status(401).send('Invalid Password');
+            }else {
+                res.status(200).send(user);
+            }
+        }
+    })
+})
+
 
 //////////
 //Get all users
