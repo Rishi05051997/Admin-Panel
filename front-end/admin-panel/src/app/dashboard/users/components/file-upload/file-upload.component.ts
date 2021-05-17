@@ -94,7 +94,7 @@ onSubmit(){
       var data = this.uploadForm.value;
 
       // console.log(data);
-      debugger;
+      // debugger;
       if(confirm('Wheather you need to override this file?')){
         return this.userService.updateFile(id, data).subscribe(
           res => {

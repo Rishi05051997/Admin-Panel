@@ -57,12 +57,12 @@ export class UsersServiceService {
   }
 
   getFileUploads(){
-    debugger;
+    // debugger;
     return this.http.get(`${this.baseUri}/file-upload/allFiles`)
   }
 
   updateFile(id, data){
-    debugger;
+    // debugger;
     return this.http.put(`${this.baseUri}/file-upload/update/${id}`, data );
   }
 

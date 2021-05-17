@@ -5,6 +5,7 @@ import { JwtService } from './service/jwt.service';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { AuthGuardService } from './service/auth-guard.service';
 import { NoAuthGuardService } from './service/no-auth-guard.service';
+import { AuthService } from './auth/auth.service';
 
 
 
@@ -12,8 +13,9 @@ import { NoAuthGuardService } from './service/no-auth-guard.service';
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
-  providers:[ JwtService, HttpInterceptorService, AuthGuardService, NoAuthGuardService]
+  providers:[ JwtService, HttpInterceptorService, AuthGuardService, NoAuthGuardService, AuthService]
 })
 export class CoreModule { }
