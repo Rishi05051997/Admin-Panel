@@ -57,7 +57,7 @@ readEmployee(){
    const array:any = JSON.parse(localStorage.getItem('token'));
 
    for(var i=0; i<this.allUsers.length;i++){
-    if(array.email == this.allUsers[i].email && this.usercontact.email == array.email && this.usercontact.email == array.email){
+    if(array.email == this.allUsers[i].email &&  this.usercontact.email == array.email){
 
       if(this.allUsers[i].status){
         return this.showAddUser = true;
